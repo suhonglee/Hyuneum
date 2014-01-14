@@ -1,0 +1,31 @@
+
+.about{
+	height: 200px;
+	
+}
+
+.item-hover{
+	position: relative;
+	margin: 0px auto;
+	
+	
+}
+.item-hover > img{
+	margin: 0px auto;	
+}
+
+
+.item-hover:hover{
+	background-color: #554ad7;
+	border-radius: 20px 0px 20px 0px;
+	
+}
+
+.content-detail{
+	
+	float: left;
+	margin-left: 8px;
+}
+.content-detail:hover{
+	
+}

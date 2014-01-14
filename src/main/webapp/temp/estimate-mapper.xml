@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 
+Korea Contents Company R&D TEAM
+Developer : lee su hong
+Last-Modified : 2013.11.07
+ -->
+<mapper namespace="estimate">
+	
+	<select id="getEstimate" parameterType="int" resultType="com.kcontents.hyuneum.domain.Estimate">
+		select *
+		from estimate
+		WHERE no=#{no}
+	</select>
+	
+	<select id="getEstimateList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select *
+		from estimate
+		order by no desc
+		<if test="page > 0">
+			limit 10 offset #{startNumber}
+		</if>
+	</select>
+	
+	<select id="getEstimateMax" resultType="int">
+		select MAX((@rownum:=@rownum+1)) rownum 
+		from (SELECT @rownum:=0) row, estimate
+	</select>
+	
+	<insert id="postEstimate" parameterType="com.kcontents.hyuneum.domain.Estimate">
+		insert into estimate
+		(title,content,time,tel,fileName,filePath,fileSize)
+		VALUES
+		(#{title},#{content},now(),#{tel},#{fileName},#{filePath},#{fileSize})
+	</insert>
+	
+	
+</mapper>

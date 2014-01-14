@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 
+Korea Contents Company R&D TEAM
+Developer : lee su hong
+Last-Modified : 2013.11.07
+ -->
+<mapper namespace="notice">
+	
+	<select id="getNotice" parameterType="int" resultType="com.kcontents.hyuneum.domain.Notice">
+		select *
+		from notice
+		WHERE no=#{no}
+	</select>
+	
+	<select id="getNoticeList" resultType="java.util.HashMap">
+		select *
+		from notice
+	</select>
+	
+	<insert id="postNotice" parameterType="com.kcontents.hyuneum.domain.Notice">
+		insert into notice
+		(title,content,time)
+		VALUES
+		(#{title},#{content},now())
+	</insert>
+	
+	
+</mapper>

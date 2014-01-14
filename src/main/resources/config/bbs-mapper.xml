@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 
+Korea Contents Company R&D TEAM
+Developer : lee su hong
+Last-Modified : 2013.11.07
+ -->
+<mapper namespace="bbs">
+	
+	<select id="getBbs" parameterType="java.util.HashMap" resultType="com.kcontents.hyuneum.domain.Bbs">
+		select *
+		from bbs
+		WHERE no=#{no} AND code like #{code}
+	</select>
+	
+	<select id="getBbsList" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		select *
+		from bbs
+		WHERE code like #{code}
+		order by no desc
+		<if test="page > 0">
+			limit 10 offset #{startNumber}
+		</if>
+	</select>
+	
+	<select id="getBbsMaxSize" parameterType="java.util.HashMap" resultType="int">
+		select MAX((@rownum:=@rownum+1)) rownum 
+		from (SELECT @rownum:=0) row, bbs
+		WHERE code like #{code}
+	</select>
+	
+	<insert id="postBbs" parameterType="com.kcontents.hyuneum.domain.Bbs">
+		insert into bbs
+		(code,title,content,time,tel,fileName,filePath,fileSize)
+		VALUES
+		(#{code},#{title},#{content},now(),#{tel},#{fileName},#{filePath},#{fileSize})
+	</insert>
+	
+	<delete id="deleteBbs" parameterType="java.util.HashMap">
+		delete 
+		from bbs
+		where no=#{no}
+	</delete>
+</mapper>

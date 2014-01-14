@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<!-- 
+Korea Contents Company R&D TEAM
+Developer : lee su hong
+Last-Modified : 2013.11.07
+ -->
+<mapper namespace="admin">
+	
+	<insert id="postAdmin" parameterType="com.kcontents.hyuneum.domain.Admin">
+		insert into admin
+		(id,password,userCode)
+		VALUES
+		(#{id},#{password},#{userCode})
+	</insert>
+	
+	<select id="getAdmin" parameterType="com.kcontents.hyuneum.domain.Admin" resultType="com.kcontents.hyuneum.domain.Admin">
+		select *
+		from admin
+		where id like #{id}
+		<if test="password != null">
+			AND password like #{password}
+		</if>
+	</select>
+</mapper>
